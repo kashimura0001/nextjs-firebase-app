@@ -20,6 +20,9 @@ export default function UserShow() {
     if (query.uid === undefined) {
       return;
     }
+    if (user === null) {
+      return;
+    }
 
     const loadUser = async () => {
       const doc = await firebase

@@ -4,7 +4,6 @@ import firebase from "firebase/app";
 import Layout from "../../components/Layout";
 import { Question } from "../../models/Question";
 import { useAuthentication } from "../../hooks/authentication";
-import { toast } from "react-toastify";
 import { Answer } from "../../models/Answer";
 
 type Query = {
@@ -58,8 +57,12 @@ export default function QuestionsShow() {
   }
 
   useEffect(() => {
+    if (user === null) {
+      return;
+    }
+
     loadData();
-  }, [query.id]);
+  }, [query.id, user]);
 
   async function onSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
